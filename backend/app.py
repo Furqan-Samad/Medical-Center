@@ -11,8 +11,8 @@ from flask_cors import CORS
 from functools import wraps
 from flask import session, redirect, url_for
 
-WHATSAPP_TOKEN = "EAAcvDDj1jRABRR032ZAtrvv7HwQ5GXXUOVfJ5p2522Y8pHJg3RkUYghZCQR0KBkl9f9a1lEbYKkh2CrvhNSP2nglV3IPpic3QuBnAnifgIo4D0h68kMlL1m9Cr5cXnjSmBOtQNmvE2DlWFWRm9rj6sU6oFvHzOEBYowRMPyDpCxsBiGbQAm0wy2zzSCku1HjM344euKImfa278WFr0Pr11DZCkK3tQeEKGVnVMKrBfx4j0i2dKCeLTiesA0mx6wikhIOs68zWxiQbDlYmYX2Srw"
-PHONE_NUMBER_ID = "1160544247134437"
+WHATSAPP_TOKEN = "IPpic3QuBnAnifgIo4D0h68kMlLGbQAm0wy2zzSCku1HjM344euKrBfx4j0i2dKCeLTiesA0mx6wikhIOs68zWxiQbDlYmYX2Srw"
+PHONE_NUMBER_ID = "11111111111111"
 
 # Base directory for resolving static/templates reliably
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +25,7 @@ app = Flask(__name__,
             static_folder=os.path.abspath(os.path.join(BASE_DIR, '..', 'static')),
             static_url_path='/static')
 
-app.secret_key = 'medpro_secret_key_2026'
+app.secret_key = ''
 
 # Enable CORS so frontend resources can connect from other hosts on LAN
 CORS(app)
