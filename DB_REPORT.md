@@ -13,10 +13,7 @@ Tables found:
 - `appointments` — scheduled appointments
 
 Charset: `utf8mb4` (good for emoji + wide charset support)
-
-## Issues & Findings
-1. Database name mismatch:
-   - `db_schema.sql` creates `hospital_db` but executes `USE hospital1_db`. This appears to be a typo and will cause `init_db.py` to create the wrong DB or fail. Change `USE hospital1_db;` to `USE hospital_db;`.
+.
 
 2. Roles enum mismatch:
    - `users.role` ENUM is `('admin','doctor','lab','staff')`. The app expects roles like `reception` and uses lowercase comparisons (`session.get('role')`). Add `reception` to the enum or normalize app role checks.
