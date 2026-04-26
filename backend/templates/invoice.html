@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Invoice - {{ patient.name }}</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+    background: #f4f6fb;
+    font-family: Arial, sans-serif;
+}
+
+.invoice-box {
+    max-width: 900px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.invoice-header {
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.invoice-header h2 {
+    margin: 0;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.invoice-meta {
+    text-align: right;
+    font-size: 14px;
+}
+
+/* SECTION TITLES */
+.section-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* TABLE */
+.table th {
+    background: #f1f5f9;
+}
+
+.total-box {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.total-box h3 {
+    font-weight: bold;
+    color: #16a34a;
+}
+
+.footer-note {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 40px;
+    color: #6b7280;
+}
+
+@media print {
+    .no-print { display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="invoice-box">
+
+    <!-- HEADER -->
+    <div class="row invoice-header">
+        <div class="col-md-6">
+            <h2>MedSystem Pro</h2>
+            <p class="mb-0">Medical Invoice</p>
+        </div>
+
+        <div class="col-md-6 invoice-meta">
+            <p><strong>Invoice ID:</strong> #INV-{{ patient.id }}</p>
+            <p><strong>Date:</strong> {{ moment().format('YYYY-MM-DD') if moment else '' }}</p>
+        </div>
+    </div>
+
+    <!-- PATIENT + CONSULTATION -->
+    <div class="row mb-4">
+
+        <div class="col-md-6">
+            <h5 class="section-title">Patient Information</h5>
+            <p><strong>Name:</strong> {{ patient.name }}</p>
+            <p><strong>Phone:</strong> {{ patient.phone }}</p>
+            <p><strong>Age:</strong> {{ patient.age }}</p>
+            <p><strong>Gender:</strong> {{ patient.gender }}</p>
+        </div>
+
+        <div class="col-md-6">
+            <h5 class="section-title">Consultation Details</h5>
+            <p><strong>Doctor:</strong> {{ patient.assigned_doctor }}</p>
+            <p><strong>Diagnosis:</strong> {{ patient.disease_summary }}</p>
+            <p><strong>Department:</strong> General OPD</p>
+            <p><strong>Room:</strong> Room 01</p>
+        </div>
+
+    </div>
+
+    <!-- BILLING TABLE -->
+    <h5 class="section-title">Billing Summary</h5>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th class="text-end">Amount (Rs.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Consultation / Treatment</td>
+                <td class="text-end">{{ patient.total_bill }}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Total</th>
+                <th class="text-end">{{ patient.total_bill }}</th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <!-- TOTAL -->
+    <div class="total-box">
+        <p>Total Payable:</p>
+        <h3>Rs. {{ patient.total_bill }}</h3>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="text-center mt-4 no-print">
+        <button onclick="window.print()" class="btn btn-primary">Print</button>
+        <a href="/" class="btn btn-secondary">Back</a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/92{{ patient.phone[1:] }}?text=Your invoice is ready"
+           class="btn btn-success">
+           📱 WhatsApp
+        </a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-note">
+        This is a system-generated invoice. No signature required.
+    </div>
+
+</div>
+
+</body>
+</html>
